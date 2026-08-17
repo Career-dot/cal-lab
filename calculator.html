@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalcLab — Calculator</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="index.html" class="brand-link" aria-label="Go to homepage">
+      <div class="brand-mark" id="brand-mark-icon"></div>
+      <div>
+        <div class="brand-name">CalcLab</div>
+        <div class="brand-tagline">Calculate &bull; Plan &bull; Build a Better Tomorrow</div>
+      </div>
+    </a>
+  </div>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="financial.html" target="_blank" rel="noopener noreferrer">Financial</a>
+    <a href="fitness.html" target="_blank" rel="noopener noreferrer">Fitness &amp; Health</a>
+    <a href="math.html" target="_blank" rel="noopener noreferrer">Math</a>
+    <a href="other.html" target="_blank" rel="noopener noreferrer">Other</a>
+  </nav>
+  <div class="header-actions">
+    <a href="all-calculators.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">All Calculators <span id="all-calc-arrow"></span></a>
+  </div>
+</header>
+
+<div class="page-intro calc-page-intro">
+  <div class="category-icon-badge" id="calc-icon"></div>
+  <div>
+    <h1 id="calc-name">Calculator</h1>
+    <p id="calc-description"></p>
+  </div>
+</div>
+
+<main class="page-main">
+  <div class="calc-columns" id="calc-columns">
+    <section class="calc-card-panel">
+      <h2 class="calc-panel-heading">Inputs</h2>
+      <form id="calc-form" class="calc-form" novalidate></form>
+    </section>
+    <section class="calc-card-panel">
+      <h2 class="calc-panel-heading">Result</h2>
+      <div id="calc-results" class="calc-results"></div>
+    </section>
+  </div>
+
+  <div id="calc-placeholder" class="stub-main">
+    <p>This calculator's math engine isn't built yet — the current focus was building out a first batch of real, working calculators. This one's formula is a follow-up task.</p>
+    <a href="index.html" class="btn btn-primary">Back to Home <span id="back-arrow"></span></a>
+  </div>
+
+  <section class="category-panel" id="related-calc-panel" style="display:none;"></section>
+
+  <section class="calc-card-panel calc-info-panel" id="calc-info-panel" style="display:none;"></section>
+</main>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/calc-engine.js"></script>
+<script src="js/calc-definitions.js"></script>
+<script src="js/calc-content.js"></script>
+<script src="js/scientific-calculator.js"></script>
+<script>
+  document.getElementById('brand-mark-icon').innerHTML = iconMarkup('calculator');
+  document.getElementById('all-calc-arrow').innerHTML = iconMarkup('arrowRight');
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug') || '';
+  const meta = findCalculatorMeta(slug);
+  const name = meta ? meta.name : (params.get('name') || 'Calculator');
+
+  document.title = `CalcLab — ${name}`;
+  document.getElementById('calc-name').textContent = name;
+  document.getElementById('calc-icon').innerHTML = iconMarkup(meta ? meta.icon : 'calculator');
+  document.getElementById('calc-description').textContent = meta ? meta.description : '';
+
+  const def = CALC_DEFINITIONS[slug];
+  const columnsEl = document.getElementById('calc-columns');
+  const placeholderEl = document.getElementById('calc-placeholder');
+
+  if (def) {
+    placeholderEl.style.display = 'none';
+    columnsEl.style.display = '';
+    if (slug === 'scientific-calculator') {
+      document.querySelector('.calc-card-panel:nth-child(2)').style.display = 'none';
+      renderScientificCalculator();
+    } else {
+      renderCalculatorForm(def);
+    }
+  } else {
+    columnsEl.style.display = 'none';
+    placeholderEl.style.display = '';
+    document.getElementById('back-arrow').innerHTML = iconMarkup('arrowRight');
+  }
+
+  // Related Calculators + About content — shown for any recognized calculator,
+  // whether or not its math engine is built yet, so every calculator page is
+  // still useful to land on.
+  if (meta) {
+    const group = findCalculatorGroup(slug);
+    if (group) {
+      const relatedCalculators = group.calculators.filter((c) => c.slug !== slug);
+      if (relatedCalculators.length) {
+        const relatedPanel = document.getElementById('related-calc-panel');
+        // Heading is always "Related Calculators" — the category name only
+        // appears in the description below it, not as the section title.
+        const relatedEntity = {
+          ...group,
+          label: 'Related Calculators',
+          description: `More ${group.label} calculators you might find useful.`,
+          calculators: relatedCalculators,
+        };
+        relatedPanel.innerHTML = categoryPanelMarkup(relatedEntity, { cap: 4, viewAllHref: group.href });
+        relatedPanel.style.display = '';
+      }
+    }
+
+    const infoPanel = document.getElementById('calc-info-panel');
+    const content = getCalcContent(slug, meta);
+    infoPanel.innerHTML = `
+      <h2 class="calc-info-title">${iconMarkup('info')} What is the ${meta.name}?</h2>
+      <p>${content.about}</p>
+      <h3>How It Works</h3>
+      <p>${content.how}</p>
+      ${content.faq && content.faq.length ? `
+        <h3>Frequently Asked Questions</h3>
+        <div class="calc-faq">
+          ${content.faq.map((f) => `<div class="faq-item"><p class="faq-q">${f.q}</p><p class="faq-a">${f.a}</p></div>`).join('')}
+        </div>` : ''}
+    `;
+    infoPanel.style.display = '';
+  }
+</script>
+</body>
+</html>

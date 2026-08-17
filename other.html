@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CalcLab — Other Calculators</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="brand">
+    <a href="index.html" class="brand-link" aria-label="Go to homepage">
+      <div class="brand-mark" id="brand-mark-icon"></div>
+      <div>
+        <div class="brand-name">CalcLab</div>
+        <div class="brand-tagline">Calculate &bull; Plan &bull; Build a Better Tomorrow</div>
+      </div>
+    </a>
+  </div>
+  <nav class="main-nav">
+    <a href="index.html">Home</a>
+    <a href="financial.html" target="_blank" rel="noopener noreferrer">Financial</a>
+    <a href="fitness.html" target="_blank" rel="noopener noreferrer">Fitness &amp; Health</a>
+    <a href="math.html" target="_blank" rel="noopener noreferrer">Math</a>
+    <a href="other.html" class="active" target="_blank" rel="noopener noreferrer">Other</a>
+  </nav>
+  <div class="header-actions">
+    <a href="all-calculators.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">All Calculators <span id="all-calc-arrow"></span></a>
+  </div>
+</header>
+
+<div class="page-intro">
+  <div class="hero-eyebrow">Smart calculations. A brighter future.</div>
+  <h1>Other Calculators</h1>
+  <p>Every everyday calculator on CalcLab, organized by category.</p>
+</div>
+
+<main class="main-content">
+  <aside class="sidebar">
+    <div class="sidebar-label">CATEGORIES</div>
+    <nav class="category-list" id="category-list"></nav>
+    <div class="sidebar-cta">
+      <div class="cta-icon">🌱</div>
+      <p>Handy tools, one<br>click away.</p>
+      <a href="all-calculators.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block">Explore All Calculators <span class="cta-arrow-icon"></span></a>
+    </div>
+  </aside>
+
+  <section class="category-panel" id="category-panel">
+    <!-- rendered below -->
+  </section>
+</main>
+
+<footer class="footer-strip">
+  <div class="footer-item">
+    <div class="icon-tile" id="footer-icon-1"></div>
+    <div><div class="footer-title">100% Free</div><div class="footer-sub">No registration required</div></div>
+  </div>
+  <div class="footer-item">
+    <div class="icon-tile" id="footer-icon-2"></div>
+    <div><div class="footer-title">Fast &amp; Accurate</div><div class="footer-sub">Instant results</div></div>
+  </div>
+  <div class="footer-item">
+    <div class="icon-tile" id="footer-icon-3"></div>
+    <div><div class="footer-title">Built for Everyone</div><div class="footer-sub">Students, families &amp; professionals</div></div>
+  </div>
+  <div class="footer-item">
+    <div class="icon-tile" id="footer-icon-4"></div>
+    <div><div class="footer-title">Your Financial Partner</div><div class="footer-sub">Learn &bull; Plan &bull; Grow</div></div>
+  </div>
+</footer>
+<div class="footer-credit">Powered by <strong>CSOFT</strong>. Copyright © <strong>CSOFT</strong>.</div>
+
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/category-sidebar-page.js"></script>
+<script>
+  initPageChrome();
+  initSidebarPanel({ groups: OTHER_SUBCATEGORIES });
+</script>
+</body>
+</html>
