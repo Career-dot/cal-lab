@@ -60,6 +60,26 @@
   <section class="calc-card-panel calc-info-panel" id="calc-info-panel" style="display:none;"></section>
 </main>
 
+<footer class="footer-strip">
+  <div class="footer-item">
+    <div class="icon-tile" id="footer-icon-1"></div>
+    <div><div class="footer-title">100% Free</div><div class="footer-sub">No registration required</div></div>
+  </div>
+  <div class="footer-item">
+    <div class="icon-tile" id="footer-icon-2"></div>
+    <div><div class="footer-title">Fast &amp; Accurate</div><div class="footer-sub">Instant results</div></div>
+  </div>
+  <div class="footer-item">
+    <div class="icon-tile" id="footer-icon-3"></div>
+    <div><div class="footer-title">Built for Everyone</div><div class="footer-sub">Students, families &amp; professionals</div></div>
+  </div>
+  <div class="footer-item">
+    <div class="icon-tile" id="footer-icon-4"></div>
+    <div><div class="footer-title">Your Financial Partner</div><div class="footer-sub">Learn &bull; Plan &bull; Grow</div></div>
+  </div>
+</footer>
+<div class="footer-credit">Powered by <strong>CSOFT</strong>. Copyright © <strong>CSOFT</strong>.</div>
+
 <script src="js/icons.js"></script>
 <script src="js/data.js"></script>
 <script src="js/render.js"></script>
@@ -70,6 +90,11 @@
 <script>
   document.getElementById('brand-mark-icon').innerHTML = iconMarkup('calculator');
   document.getElementById('all-calc-arrow').innerHTML = iconMarkup('arrowRight');
+
+  const f1 = document.getElementById('footer-icon-1'); if (f1) f1.innerHTML = iconMarkup('shield');
+  const f2 = document.getElementById('footer-icon-2'); if (f2) f2.innerHTML = iconMarkup('lightning');
+  const f3 = document.getElementById('footer-icon-3'); if (f3) f3.innerHTML = iconMarkup('heart');
+  const f4 = document.getElementById('footer-icon-4'); if (f4) f4.innerHTML = iconMarkup('sparkle');
 
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug') || '';
