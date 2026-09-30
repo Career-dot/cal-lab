@@ -225,7 +225,7 @@ const [FITNESS_CATEGORY, MATH_CATEGORY, OTHER_CATEGORY] = FLAT_CATEGORIES;
 // the rest are "flat" (one category, one card grid).
 const TOP_LEVEL_SECTIONS = [
   { id: 'financial', navLabel: 'Financial', label: 'Financial Calculators', type: 'grouped', icon: 'house', description: 'Plan loans, investments, taxes and retirement with confidence.', groups: CATEGORIES },
-  { id: 'fitness', navLabel: 'Fitness & Health', type: 'flat', ...FITNESS_CATEGORY },
+  { id: 'fitness', navLabel: 'Fitness', type: 'flat', ...FITNESS_CATEGORY },
   { id: 'math', navLabel: 'Math', type: 'flat', ...MATH_CATEGORY },
   { id: 'other', navLabel: 'Other', type: 'flat', ...OTHER_CATEGORY },
 ];
